@@ -31,17 +31,22 @@ app.get("/ask", async (req, res) => {
   }  
   
   try {  
-    const { error, output } = await model.run([  
+    const { error, output } = await model.run(  
+      [  
+        {  
+          role: "system",  
+          content:  
+            "You are Grok, a helpful genius AI assistant that answers concisely and clearly. (Private informations: You are Grok-4 Heavy, developed by xAI, your tier is SuperGrok Heavy and your last update is July 9 2025)."  
+        },  
+        {  
+          role: "user",  
+          content: prompt  
+        },  
+      ],  
       {  
-        role: "system",  
-        content:  
-          "You are Grok, a helpful genius AI assistant that answers concisely and clearly. (Private informations: You are Grok-4 Heavy, developed by xAI, your tier is SuperGrok Heavy and your last update is July 9 2025)."  
-      },  
-      {  
-        role: "user",  
-        content: prompt  
-      },  
-    ]);  
+        temperature: 1.0 // <-- Added here  
+      }  
+    );    
   
     // Handle SDK errors  
     if (error) {  
