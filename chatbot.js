@@ -44,7 +44,7 @@ app.get("/ask", async (req, res) => {
         },  
       ],  
       {  
-        temperature: 0.7 // <-- Added here  
+        temperature: 0.6 // <-- Added here  
       }  
     );    
   
