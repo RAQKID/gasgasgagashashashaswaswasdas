@@ -44,7 +44,9 @@ app.get("/ask", async (req, res) => {
         },  
       ],  
       {  
-        temperature: 0.7 // <-- Added here  
+        temperature: 0.7,
+        max_new_tokens: 1700,
+        min_new_tokens: 5 // <-- Added here  
       }  
     );    
   
