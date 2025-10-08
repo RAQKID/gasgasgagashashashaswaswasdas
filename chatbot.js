@@ -31,17 +31,23 @@ app.get("/ask", async (req, res) => {
   }
 
   try {
-    const { error, output } = await model.run([
+    const { error, output } = await model.run(
+      [
+        {
+          role: "system",
+          content:
+            "You are Grok-4 Heavy, a helpful genius AI assistant that answers concisely and clearly. (Your private informations: Developed by xAI, your tier is SuperGrok Heavy and last update are July 9 2025)"
+        },
+        {
+          role: "user",
+          content: prompt
+        },
+      ],
       {
-        role: "system",
-        content:
-          "You are Grok-4 Heavy, a helpful genius AI assistant that answers concisely and clearly. (Your private informations: Developed by xAI, your tier is SuperGrok Heavy and last update are July 9 2025)"
-      },
-      {
-        role: "user",
-        content: prompt
-      },
-    ]);
+        max_tokens: 4000, // 🔥 Added max tokens
+        temperature: 0.8  // 🎨 Adjust creativity (0.3–1.0 recommended)
+      }
+    );
 
     // Handle SDK errors
     if (error) {
